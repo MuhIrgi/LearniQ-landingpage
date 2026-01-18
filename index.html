@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearniQ - Kendalikan Perjalanan Belajarmu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2180AE;
+            --primary-dark: #1a6a8d;
+            --accent-color: #FF6B6B;
+            --accent-light: #FFE0E0;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+            --success-color: #00d084;
+            --warning-color: #ffa500;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 14px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f0f7 100%);
+            padding: 80px 0;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(33, 128, 174, 0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .dashboard-mockup {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .mockup-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mockup-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* ========== PROBLEM SECTION ========== */
+        .problem {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .problem h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .problem-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* ========== FEATURES SECTION ========== */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(33, 128, 174, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .feature-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .demo-badge {
+            background: var(--accent-light);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ========== TESTIMONIALS SECTION ========== */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .testimonials h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stars {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .author-info small {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        /* ========== PRICING SECTION ========== */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .pricing h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(33, 128, 174, 0.15);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .currency {
+            font-size: 18px;
+        }
+
+        .period {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* ========== FAQ SECTION ========== */
+        .faq {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .faq h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-final {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .cta-final > .container > p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .signup-form input {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .signup-form button {
+            padding: 14px 40px;
+        }
+
+        .form-note {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features h2, .problem h2, .pricing h2, .faq h2 {
+                font-size: 28px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .signup-form input,
+            .signup-form button {
+                width: 100%;
+            }
+
+            .mockup-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigasi -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <h1>LearniQ</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Fitur</a></li>
+            <li><a href="#pricing">Harga</a></li>
+            <li><a href="#testimonials">Testimoni</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Ubah Kekacauan Jadi Kejelasan.<br>Kendalikan Perjalanan Belajarmu.</h1>
+            <p class="hero-subtitle">
+                Ubah kekacauan jadi kejelasan—lacak setiap milestone belajar, tetap bertanggung jawab bersama komunitasmu, dan capai tujuan lebih cepat dengan insight berbasis data.
+            </p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="document.getElementById('signup-section').scrollIntoView(); document.getElementById('name').focus()">Mulai Gratis</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('demoModal').classList.add('show')">Lihat Demo</button>
+            </div>
+            <p style="color: var(--text-light); font-size: 14px;">✓ Bergabung dengan 50K+ pelajar | ⭐⭐⭐⭐⭐ rating 4,8/5</p>
+        </div>
+        <div class="hero-image">
+            <div class="dashboard-mockup">
+                <div class="mockup-header">📊 Dashboard Belajar Kamu</div>
+                <div class="mockup-content">
+                    <div class="stat-card">
+                        <span class="stat-label">Tingkat Selesai</span>
+                        <span class="stat-value">78%</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Minggu Ini</span>
+                        <span class="stat-value">12j 34m</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value">🔥 15 hari</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Problem Section -->
+<section class="problem">
+    <div class="container">
+        <h2>Tantangan Belajar yang Nyata</h2>
+        <p class="section-subtitle">Inilah yang sering dialami kebanyakan pelajar:</p>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">📚</div>
+                <p><strong>73%</strong> pelajar berhenti di tengah jalan karena tidak punya sistem pelacakan yang jelas.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">😫</div>
+                <p>Tanpa visualisasi progres, motivasi bisa turun hingga <strong>65%</strong> hanya dalam 2 minggu.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🔀</div>
+                <p>Mengelola banyak sumber belajar sekaligus memicu <strong>beban kognitif</strong> dan rasa kewalahan.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fitur / Solusi -->
+<section id="features" class="features">
+    <div class="container">
+        <h2>Pusat Kontrol Belajarmu</h2>
+        <p class="section-subtitle">Semua yang kamu butuhkan untuk sukses, dalam satu platform.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Kerangka Tujuan Cerdas</h3>
+                <p>Tetapkan tujuan belajar SMART dan dapatkan pemecahan milestone secara otomatis dengan timeline yang realistis.</p>
+                <div class="feature-demo">
+                    <div class="demo-badge">✓ Format SMART</div>
+                    <div class="demo-badge">✓ Breakdown Otomatis</div>
+                    <div class="demo-badge">✓ Prediksi Timeline</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Dashboard Progres Visual</h3>
+                <p>Lihat analitik belajar kamu secara real-time dengan metrik yang bisa dikustomisasi dan pencapaian yang jelas.</p>
+                <div class="feature-demo">
+                    <div class="demo-badge">✓ Statistik Real-time</div>
+                    <div class="demo-badge">✓ Metrik Kustom</div>
+                    <div class="demo-badge">✓ Achievement & Streak</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Komunitas Belajar</h3>
+                <p>Bergabung atau buat kelompok belajar, bagikan progres, dan tetap termotivasi lewat akuntabilitas bersama.</p>
+                <div class="feature-demo">
+                    <div class="demo-badge">✓ Kelompok Belajar</div>
+                    <div class="demo-badge">✓ Dukungan Teman</div>
+                    <div class="demo-badge">✓ Leaderboard</div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Rekomendasi Personal Berbasis AI</h3>
+                <p>Dapatkan saran cerdas tentang waktu belajar terbaik, metode yang cocok, dan rekomendasi sumber belajar.</p>
+                <div class="feature-demo">
+                    <div class="demo-badge">✓ Insight AI</div>
+                    <div class="demo-badge">✓ Waktu Optimal</div>
+                    <div class="demo-badge">✓ Rekomendasi Sumber</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimoni -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <h2>Dicintai Para Pembelajar</h2>
+        <p class="section-subtitle">Bergabung dengan 50K+ pengguna yang sudah mengubah cara mereka belajar.</p>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Dulu catatan belajarku berantakan. Sekarang semua terstruktur. Produktivitasku naik 40% hanya dalam 3 minggu."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AP</div>
+                    <div class="author-info">
+                        <strong>Andi Pratama</strong>
+                        <small>Mahasiswa Data Science, Jakarta</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"LearniQ bantu aku menyeimbangkan freelance dan kuliah. Rekomendasi AI-nya beneran kerasa bedanya."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SR</div>
+                    <div class="author-info">
+                        <strong>Siti Rahayu</strong>
+                        <small>Mahasiswa Informatika + Freelancer, Yogyakarta</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Fitur komunitas bikin aku konsisten. Sertifikasi Python bisa kelar 2 bulan lebih cepat dari target!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">BW</div>
+                    <div class="author-info">
+                        <strong>Bambang Wijaya</strong>
+                        <small>Developer Profesional, Bandung</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Harga -->
+<section id="pricing" class="pricing">
+    <div class="container">
+        <h2>Paket untuk Setiap Pembelajar</h2>
+        <p class="section-subtitle">Pilih paket yang paling sesuai dengan perjalanan belajarmu.</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Gratis</h3>
+                <div class="price"><span class="currency">Rp</span> <span class="amount">0</span><span class="period">/bulan</span></div>
+                <ul class="pricing-features">
+                    <li>✓ Pelacakan tujuan dasar</li>
+                    <li>✓ Analitik sederhana</li>
+                    <li>✓ Akses komunitas (terbatas)</li>
+                    <li>✓ Akses aplikasi mobile</li>
+                    <li>✗ Rekomendasi AI</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Mulai Gratis</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="badge">REKOMENDASI</div>
+                <h3>Pro</h3>
+                <div class="price"><span class="currency">Rp</span> <span class="amount">49.900</span><span class="period">/bulan</span></div>
+                <ul class="pricing-features">
+                    <li>✓ Tujuan & pelacakan tanpa batas</li>
+                    <li>✓ Analitik lanjutan</li>
+                    <li>✓ Akses penuh komunitas</li>
+                    <li>✓ Rekomendasi AI</li>
+                    <li>✓ Dukungan prioritas</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Coba 7 Hari Gratis</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price"><span class="currency">Rp</span> <span class="amount">99.900</span><span class="period">/bulan</span></div>
+                <ul class="pricing-features">
+                    <li>✓ Semua fitur Pro</li>
+                    <li>✓ Sesi coaching 1-on-1</li>
+                    <li>✓ Laporan lanjutan & ekspor</li>
+                    <li>✓ Akses API</li>
+                    <li>✓ Dukungan 24/7</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Hubungi Tim Kami</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+    <div class="container">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        
+        <div class="faq-grid">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Bagaimana cara kerja rekomendasi AI?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>AI kami menganalisis pola belajar, kecepatan progres, dan preferensi pribadimu untuk menyarankan waktu belajar terbaik, metode yang cocok, dan sumber belajar yang relevan. Semakin sering kamu pakai, semakin akurat rekomendasinya.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Apakah LearniQ bisa digunakan offline?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Bisa. LearniQ punya mode offline. Progres dan tujuan kamu akan otomatis tersinkron saat kembali online. Cocok untuk belajar di perjalanan tanpa khawatir koneksi internet.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Bagaimana dengan keamanan data saya?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Data kamu terenkripsi end-to-end dan disimpan secara aman. Kami mematuhi regulasi perlindungan data (termasuk standar Indonesia). Kami tidak pernah menjual data kamu ke pihak ketiga, dan kamu bisa mengunduh atau menghapus data kapan saja.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Apakah saya bisa terhubung dengan pembelajar lain?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Tentu. Kamu bisa bergabung dengan grup belajar yang sudah ada atau membuat grup sendiri. Ada fitur tujuan bersama, forum diskusi, berbagi progres, dan tantangan kelompok untuk menjaga akuntabilitas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(event)">
+                    <span>Apakah ada garansi uang kembali?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Ada. Kami memberikan garansi uang kembali 30 hari untuk paket Pro dan Premium. Jika kamu merasa tidak cocok, kami kembalikan uangmu tanpa pertanyaan rumit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Akhir -->
+<section class="cta-final">
+    <div class="container">
+        <h2>Siap Mengubah Cara Kamu Belajar?</h2>
+        <p>Bergabunglah dengan ribuan pembelajar lainnya. Mulai gratis hari ini.</p>
+        <div id="signup-section" class="signup-form">
+            <input type="text" id="name" placeholder="Nama kamu" required>
+            <input type="email" id="email" placeholder="Email kamu" required>
+            <button class="btn btn-secondary" onclick="submitSignup()" style="border-color: white; color: white;">Mulai Sekarang</button>
+        </div>
+        <p class="form-note">✓ Tanpa kartu kredit | ✓ Uji coba gratis 7 hari</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>LearniQ</h4>
+                <p>Membantu jutaan pembelajar menguasai perjalanan belajar mereka.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Produk</h4>
+                <ul>
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#pricing">Harga</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Perusahaan</h4>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Kontak</a></li>
+                    <li><a href="#">Karier</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat dan Ketentuan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LearniQ. Seluruh hak cipta dilindungi. Dibuat dengan ❤️ untuk para pembelajar.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Demo Modal -->
+<div id="demoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('demoModal').classList.remove('show')">&times;</span>
+        <h3>Demo Produk LearniQ</h3>
+        <p style="margin: 20px 0; color: #666;">🎥 Lihat bagaimana LearniQ membantumu menguasai perjalanan belajar.</p>
+        <p style="text-align: center; color: #999; padding: 40px 0;">Placeholder video demo - konten akan segera hadir.</p>
+    </div>
+</div>
+
+<script>
+    function toggleFAQ(event) {
+        const item = event.currentTarget.parentElement;
+        item.classList.toggle('active');
+    }
+
+    function submitSignup() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        
+        if (name && email) {
+            alert(`Terima kasih, ${name}! Kami telah mengirim tautan ke ${email}. Silakan cek inbox kamu.`);
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+        } else {
+            alert('Silakan isi nama dan email terlebih dahulu.');
+        }
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('demoModal');
+        if (event.target == modal) {
+            modal.classList.remove('show');
+        }
+    }
+</script>
+
+</body>
+</html>
